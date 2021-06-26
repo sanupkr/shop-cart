@@ -1,0 +1,11 @@
+const express = require("express");
+const router = express.Router();
+const {getproducts,addproducts,getsingleproduct,updateproduct,deleteProduct,addreview,getreviews} = require("../controller/productcontroller");
+const {isauthentic,accessauthentication } = require("../errormiddleware/auth");
+router.route("/admin/product/new").post(isauthentic,addproducts);
+router.route("/products").get(getproducts);
+router.route("/products/:id").get(getsingleproduct);
+router.route("/admin/product/:id").put(isauthentic,updateproduct).delete(isauthentic,accessauthentication,deleteProduct);
+router.route("/review/:id").put(isauthentic,addreview);
+router.route("/allreviews/:id").get(getreviews);
+module.exports = router;
